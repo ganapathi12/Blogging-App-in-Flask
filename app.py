@@ -30,7 +30,7 @@ class BlogPost(db.Model):
 # ]
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
@@ -51,7 +51,7 @@ def posts():
         return render_template('posts.html', posts=all_posts)
 
 
-@app.route('/home/<string:name>')
+@app.route('/home/<string:name>', methods=['GET', 'POST'])
 def hello(name):
     return name
 
@@ -61,7 +61,7 @@ def get_req():
     return 'you can only get this web page.'
 
 
-@app.route('/posts/delete/<int:id>')
+@app.route('/posts/delete/<int:id>', methods=['GET', 'POST'])
 def delete(id):
     post = BlogPost.query.get_or_404(id)
     db.session.delete(post)
